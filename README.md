@@ -1,4 +1,4 @@
-# browser-worker-monaco
+# browser-editor-monaco
 
 An example of monaco editor.
 
