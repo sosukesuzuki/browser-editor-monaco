@@ -1,12 +1,21 @@
 import { h, render } from "preact";
-import { styled, setPragma } from "goober";
+import { glob } from "goober";
+import Editor from "./components/Editor";
 
-setPragma(h);
-
-const Heading1 = styled("h1")`
-  color: red;
+glob`
+  body {
+    height: 100vh;
+    width: 100vw;
+  }
 `;
 
-const App = () => <Heading1>browser-editor-monaco</Heading1>;
+const App = () => (
+  <Editor
+    initialValue={"const foo = 'bar'"}
+    onChange={(value) => {
+      console.log(value);
+    }}
+  />
+);
 
 render(<App />, document.body);
