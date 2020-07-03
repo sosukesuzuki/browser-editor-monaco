@@ -20,9 +20,9 @@ const Container = styled("div")`
 `;
 
 export const prettierrcUri = monaco.Uri.from({
-    scheme: "file",
-    path: "/.prettierrc.json",
-  });
+  scheme: "file",
+  path: "/.prettierrc.json",
+});
 
 const initialModels: monaco.editor.ITextModel[] = [
   monaco.editor.createModel(
@@ -33,11 +33,7 @@ const initialModels: monaco.editor.ITextModel[] = [
       path: "/index.ts",
     })
   ),
-  monaco.editor.createModel(
-    `{ "singleQuote": false }`,
-    "json",
-    prettierrcUri
-  ),
+  monaco.editor.createModel(`{ "singleQuote": false }`, "json", prettierrcUri),
 ];
 
 const App = () => {

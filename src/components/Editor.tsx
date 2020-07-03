@@ -14,7 +14,9 @@ type Props = {
 monaco.languages.registerDocumentFormattingEditProvider("typescript", {
   async provideDocumentFormattingEdits(model) {
     const prettierrcModel = monaco.editor.getModel(prettierrcUri);
-    const options = prettierrcModel ? JSON.parse(prettierrcModel.getValue()) : undefined;
+    const options = prettierrcModel
+      ? JSON.parse(prettierrcModel.getValue())
+      : undefined;
     const text = await format(model.getValue(), options);
     return [
       {
