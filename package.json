@@ -1,0 +1,24 @@
+{
+  "name": "browser-editor-monaco",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier . --write",
+    "build": "webpack --mode=production",
+    "dev": "webpack-dev-server --mode=development",
+    "analyze": "ANALYZE=1 yarn build"
+  },
+  "devDependencies": {
+    "goober": "^1.8.0",
+    "html-webpack-plugin": "^4.3.0",
+    "preact": "^10.4.5",
+    "prettier": "^2.0.5",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
