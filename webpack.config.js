@@ -12,13 +12,31 @@ const plugins = [new HtmlWebpackPlugin(), new MonacoWebpackPlugin()].concat(
 );
 module.exports = {
   mode,
+  output: {
+    globalObject: "self",
+    filename: "[name].js",
+    chunkFilename: "[name].[id].[contenthash].js",
+  },
   module: {
     rules: [
       {
-        test: /\.tsx$/,
-        use: {
-          loader: "ts-loader",
-        },
+        test: /\.worker\.ts$/,
+        use: [
+          {
+            loader: "comlink-loader",
+            options: {
+              singleton: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: "ts-loader",
+          },
+        ],
       },
       {
         test: /\.css$/,

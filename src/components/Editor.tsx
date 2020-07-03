@@ -1,6 +1,8 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import * as monaco from "monaco-editor";
+import { format } from "../prettier.worker";
+import { prettierrcUri } from "..";
 
 declare const ResizeObserver: any;
 
@@ -8,6 +10,20 @@ type Props = {
   model: monaco.editor.ITextModel;
   onChange: (value: string) => void;
 };
+
+monaco.languages.registerDocumentFormattingEditProvider("typescript", {
+  async provideDocumentFormattingEdits(model) {
+    const prettierrcModel = monaco.editor.getModel(prettierrcUri);
+    const options = prettierrcModel ? JSON.parse(prettierrcModel.getValue()) : undefined;
+    const text = await format(model.getValue(), options);
+    return [
+      {
+        range: model.getFullModelRange(),
+        text,
+      },
+    ];
+  },
+});
 
 export default function Editor({ model, onChange }: Props) {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,6 +43,9 @@ export default function Editor({ model, onChange }: Props) {
       });
       setEditor(editor);
       editor.layout();
+      editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
+        editor.getAction("editor.action.formatDocument").run();
+      });
       const resizeObserver = new ResizeObserver(() => {
         editor.layout();
       });

@@ -10,6 +10,8 @@
     "analyze": "ANALYZE=1 yarn build"
   },
   "devDependencies": {
+    "@types/prettier": "^2.0.1",
+    "comlink-loader": "^2.0.0",
     "css-loader": "^3.6.0",
     "file-loader": "^6.0.0",
     "goober": "^1.8.0",

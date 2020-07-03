@@ -19,6 +19,11 @@ const Container = styled("div")`
   height: 100%;
 `;
 
+export const prettierrcUri = monaco.Uri.from({
+    scheme: "file",
+    path: "/.prettierrc.json",
+  });
+
 const initialModels: monaco.editor.ITextModel[] = [
   monaco.editor.createModel(
     "const foo = 'bar'",
@@ -29,14 +34,9 @@ const initialModels: monaco.editor.ITextModel[] = [
     })
   ),
   monaco.editor.createModel(
-    `{
-            "trailingComma": "all"
-        }`,
+    `{ "singleQuote": false }`,
     "json",
-    monaco.Uri.from({
-      scheme: "file",
-      path: "/.prettierrc.json",
-    })
+    prettierrcUri
   ),
 ];
 
