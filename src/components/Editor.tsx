@@ -5,11 +5,11 @@ import * as monaco from "monaco-editor";
 declare const ResizeObserver: any;
 
 type Props = {
-  initialValue: string;
+  model: monaco.editor.ITextModel;
   onChange: (value: string) => void;
 };
 
-export default function Editor({ initialValue, onChange }: Props) {
+export default function Editor({ model, onChange }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [
     editor,
@@ -17,7 +17,6 @@ export default function Editor({ initialValue, onChange }: Props) {
   ] = useState<monaco.editor.IStandaloneCodeEditor | null>(null);
   useEffect(() => {
     if (ref.current) {
-      const model = monaco.editor.createModel(initialValue, "typescript");
       const editor = monaco.editor.create(ref.current, {
         model,
         fontSize: 18,
@@ -35,5 +34,12 @@ export default function Editor({ initialValue, onChange }: Props) {
       return () => resizeObserver.unobserve(ref.current);
     }
   }, [ref]);
-  return <div ref={ref} style={{ height: "100%", width: "100%" }}></div>;
+  useEffect(() => {
+    if (editor) {
+      editor.setModel(model);
+    }
+  }, [model]);
+  return (
+    <div ref={ref} style={{ height: "100%", width: "calc(100% - 30px)" }}></div>
+  );
 }
