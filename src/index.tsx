@@ -27,11 +27,22 @@ export const prettierrcUri = monaco.Uri.from({
 
 const initialModels: monaco.editor.ITextModel[] = [
   monaco.editor.createModel(
-    "const foo = 'bar'",
+    `import { foo } from "./foo";
+console.log(foo);
+`,
     "typescript",
     monaco.Uri.from({
       scheme: "file",
       path: "/index.ts",
+    })
+  ),
+  monaco.editor.createModel(
+    `export const foo = { key: "value" };
+`,
+    "typescript",
+    monaco.Uri.from({
+      scheme: "file",
+      path: "/foo.ts",
     })
   ),
   monaco.editor.createModel(`{ "singleQuote": false }`, "json", prettierrcUri),
