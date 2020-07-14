@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "eslint4b": "^7.4.0",
-    "monaco-editor": "^0.20.0"
+    "monaco-editor": "^0.20.0",
+    "normalize.css": "^8.0.1"
   }
 }

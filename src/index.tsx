@@ -1,4 +1,5 @@
 import { h, render } from "preact";
+import "normalize.css";
 import { useState, useMemo } from "preact/hooks";
 import { glob, setPragma, styled } from "goober";
 import * as monaco from "monaco-editor";
