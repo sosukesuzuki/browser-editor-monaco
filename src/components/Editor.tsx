@@ -1,7 +1,8 @@
 import { h } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
 import * as monaco from "monaco-editor";
-import { format } from "../prettier.worker";
+import { format } from "../workers/prettier.worker";
+import { verify } from "../workers/eslint.worker";
 import { prettierrcUri } from "..";
 
 declare const ResizeObserver: any;
@@ -42,6 +43,11 @@ export default function Editor({ model, onChange }: Props) {
       });
       model.onDidChangeContent(() => {
         onChange(editor.getValue());
+        if (model.getModeId() === "typescript") {
+          verify(model.getValue()).then((messages) => {
+            monaco.editor.setModelMarkers(model, "ESLint", messages);
+          });
+        }
       });
       setEditor(editor);
       editor.layout();
