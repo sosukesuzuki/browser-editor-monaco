@@ -1,15 +1,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 
 const isProd = process.env.NODE_ENV === "production";
 const mode = isProd ? "production" : "development";
 
-const shouldAnalyze = process.env.ANALYZE != null;
-const plugins = [new HtmlWebpackPlugin(), new MonacoWebpackPlugin()].concat(
-  shouldAnalyze ? [new BundleAnalyzerPlugin()] : []
-);
 module.exports = {
   mode,
   output: {
@@ -48,7 +42,7 @@ module.exports = {
       },
     ],
   },
-  plugins,
+  plugins: [new HtmlWebpackPlugin(), new MonacoWebpackPlugin()],
   devtool: isProd ? "source-map" : "inline-source-map",
   resolve: {
     extensions: [".js", ".json", ".ts", ".tsx"],
